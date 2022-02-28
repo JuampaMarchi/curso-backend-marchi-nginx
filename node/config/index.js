@@ -5,7 +5,8 @@ config()
 const args = yargs(process.argv.slice(2)).argv
 
 export const serverData = {
-    port: process.env.PORT,
+    port: args.port ? args.port : process.env.PORT,
+    mode: args.mode ? args.mode : process.env.MODE,
     args: args,
     cpu: cpus().length
 }

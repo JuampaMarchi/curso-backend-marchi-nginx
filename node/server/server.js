@@ -2,6 +2,8 @@ import express from 'express'
 import { Server as HttpServer} from 'http'
 import { serverData } from '../config/index.js'
 import { mainRouter } from '../routes/main.js'
+import { fork_mode } from '../config/modes.js'
+import { URL } from 'url'
 
 export class Server {
     constructor(){
@@ -9,6 +11,7 @@ export class Server {
         this.port = serverData.port
         this.cpus = serverData.cpu
         this.mainPath = '/'
+        this.mode = serverData.mode
         this.middlewares()
         this.router()
     }
@@ -18,6 +21,14 @@ export class Server {
     }
     router(){
         this.app.use(this.mainPath, mainRouter)
+    }
+    initialize(){
+        if(this.mode == 'FORK'){
+            fork_mode(this.app)
+        }
+        if(this.mode == 'CLUSTER'){
+            
+        }
     }
     listen(){
         const http = new HttpServer(this.app)
