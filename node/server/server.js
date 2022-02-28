@@ -3,7 +3,6 @@ import { Server as HttpServer} from 'http'
 import { serverData } from '../config/index.js'
 import { mainRouter } from '../routes/main.js'
 import { fork_mode, cluster_mode } from '../config/modes.js'
-import { URL } from 'url'
 
 export class Server {
     constructor(){

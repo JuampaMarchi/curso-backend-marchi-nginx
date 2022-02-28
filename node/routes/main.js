@@ -5,7 +5,7 @@ import { serverData } from "../config/index.js";
 export const mainRouter = new Router()
 
 mainRouter.get('/', (req, res, next) => {
-    res.send(`Hola, los argumentos son ${JSON.stringify(serverData.args)}`)
+    res.send(`Hola, los argumentos son otros`)
 })
 
 mainRouter.get('/random', (req, res, next) => {
