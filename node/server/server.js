@@ -1,9 +1,9 @@
-import express from 'express'
-import { serverData } from 'file:///C:/Users/juampa/Desktop/Curso%20Backend%20con%20Nginx/node/config/index.js'
-import { mainRouter } from 'file:///C:/Users/juampa/Desktop/Curso%20Backend%20con%20Nginx/node/routes/main.js'
-import { fork_mode, cluster_mode } from 'file:///C:/Users/juampa/Desktop/Curso%20Backend%20con%20Nginx/node/config/modes.js'
+const express = require('express')
+const serverData = require('../config/index')
+const mainRouter = require('../routes/main')
+const modes = require('../config/modes')
 
-export class Server {
+class Server {
     constructor(){
         this.app = express()
         this.port = serverData.port
@@ -25,13 +25,15 @@ export class Server {
             console.log(`Server running on: http://localhost:${this.port} - PID: ${process.pid} with ${this.cpus} CPUs`)
         })
     }
-    // initialize(){
-    //     if(this.mode == 'FORK'){
-    //         fork_mode(this.app)
-    //         this.listen()
-    //     }
-    //     if(this.mode == 'CLUSTER'){
-    //         cluster_mode(this.app, this.cpus, this.port)
-    //     }
-    // }
+    initialize(){
+        if(this.mode == 'FORK'){
+            modes.fork_mode(this.app)
+            this.listen()
+        }
+        if(this.mode == 'CLUSTER'){
+            modes.cluster_mode(this.app, this.cpus, this.port)
+        }
+    }
 }
+
+module.exports = Server

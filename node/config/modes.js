@@ -1,17 +1,17 @@
-import child_process from 'child_process'
-import cluster from 'cluster'
+const { fork } = require('child_process')
+const cluster = require('cluster')
 
-export const fork_mode = (app) => {
-    const fork_process = child_process.fork(`./utils/fork_process.js`)
+const fork_mode = (app) => {
+    const child_process = fork(`./utils/fork_process.js`)
     app.all('/inicio', (req, res, next) => {
-        fork_process.send('Del padre al hijo')
-        fork_process.on('message', data => {
+        child_process.send('Del padre al hijo')
+        child_process.on('message', data => {
             res.send(`Este mensaje vino del hijo: ${data.res}`)
         })
     })
 }
 
-export const cluster_mode = (app, cpus, port) => {
+const cluster_mode = (app, cpus, port) => {
     if(cluster.isMaster) {
         console.log(`Running Master Process - PID: ${process.pid}`)
 
@@ -28,4 +28,6 @@ export const cluster_mode = (app, cpus, port) => {
         })
     }
 }
+
+module.exports = { fork_mode, cluster_mode }
 

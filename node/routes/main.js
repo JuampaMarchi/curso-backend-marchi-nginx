@@ -1,7 +1,7 @@
-import { Router } from "express";
-import { randomNum } from 'file:///C:/Users/juampa/Desktop/Curso%20Backend%20con%20Nginx/node/utils/functions.js'
+const { Router } = require('express')
+const randomNum = require('../utils/functions')
 
-export const mainRouter = new Router()
+const mainRouter = new Router()
 
 mainRouter.get('/', (req, res, next) => {
     res.send(`Hola, los argumentos son otros`)
@@ -19,4 +19,6 @@ mainRouter.get('/random', (req, res, next) => {
     randomNum(cant, numArray)
     return res.json({numArray})
 })
+
+module.exports = mainRouter
 
