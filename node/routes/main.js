@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { randomNum } from "../utils/functions.js";
-import { serverData } from "../config/index.js";
+import { randomNum } from 'file:///C:/Users/juampa/Desktop/Curso%20Backend%20con%20Nginx/node/utils/functions.js'
 
 export const mainRouter = new Router()
 

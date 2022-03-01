@@ -1,7 +1,8 @@
 import yargs from 'yargs'
-import { config } from "dotenv";
 import { cpus } from 'os'
+import { config } from "dotenv";
 config()
+
 const args = yargs(process.argv.slice(2)).argv
 console.log(args)
 export const serverData = {

@@ -1,8 +1,7 @@
 import express from 'express'
-import { Server as HttpServer} from 'http'
-import { serverData } from '../config/index.js'
-import { mainRouter } from '../routes/main.js'
-import { fork_mode, cluster_mode } from '../config/modes.js'
+import { serverData } from 'file:///C:/Users/juampa/Desktop/Curso%20Backend%20con%20Nginx/node/config/index.js'
+import { mainRouter } from 'file:///C:/Users/juampa/Desktop/Curso%20Backend%20con%20Nginx/node/routes/main.js'
+import { fork_mode, cluster_mode } from 'file:///C:/Users/juampa/Desktop/Curso%20Backend%20con%20Nginx/node/config/modes.js'
 
 export class Server {
     constructor(){
@@ -22,18 +21,17 @@ export class Server {
         this.app.use(this.mainPath, mainRouter)
     }
     listen(){
-        const http = new HttpServer(this.app)
-        http.listen(this.port, () => {
+        this.app.listen(this.port, () => {
             console.log(`Server running on: http://localhost:${this.port} - PID: ${process.pid} with ${this.cpus} CPUs`)
         })
     }
-    initialize(){
-        if(this.mode == 'FORK'){
-            fork_mode(this.app)
-            this.listen()
-        }
-        if(this.mode == 'CLUSTER'){
-            cluster_mode(this.app, this.cpus, this.port)
-        }
-    }
+    // initialize(){
+    //     if(this.mode == 'FORK'){
+    //         fork_mode(this.app)
+    //         this.listen()
+    //     }
+    //     if(this.mode == 'CLUSTER'){
+    //         cluster_mode(this.app, this.cpus, this.port)
+    //     }
+    // }
 }
