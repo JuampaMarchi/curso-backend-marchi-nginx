@@ -1,0 +1,10 @@
+curl http://localhost:3000/data
+curl http://localhost:3000/data
+curl http://localhost:3000/data
+curl http://localhost:3000/data
+curl http://localhost:3000/data
+curl http://localhost:3000/data
+curl http://localhost:3000/data
+curl http://localhost:3000/data
+curl http://localhost:3000/data
+curl http://localhost:3000/data

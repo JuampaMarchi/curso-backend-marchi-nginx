@@ -1,10 +1,17 @@
 const { Router } = require('express')
 const randomNum = require('../utils/functions')
+const serverData = require('../config/index')
 
 const mainRouter = new Router()
 
 mainRouter.get('/', (req, res, next) => {
-    res.send(`Hola, los argumentos son otros`)
+    res.send(`Hola, esta es la raiz en el puerto: <b>${serverData.port}</b> - PID <b>${process.pid}</b>`)
+})
+
+mainRouter.get('/data', (req, res, next) => {
+    console.log(`PID: ${process.pid}`)
+    console.log(`ENV: ${process.env.watch}`)
+    res.send(`Estas en DATA, usando el puerto: <b>${serverData.port}</b> - PID <b>${process.pid}</b>`)
 })
 
 mainRouter.get('/random', (req, res, next) => {
