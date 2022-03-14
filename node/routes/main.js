@@ -1,10 +1,12 @@
 const { Router } = require('express')
 const randomNum = require('../utils/functions')
 const serverData = require('../config/index')
+const pino = require('../utils/logger.js')
 
 const mainRouter = new Router()
 
 mainRouter.get('/', (req, res, next) => {
+    pino.info('Acceso a la ruta exitoso')
     res.send(`Hola, esta es la raiz en el puerto: <b>${serverData.port}</b> - PID <b>${process.pid}</b>`)
 })
 
