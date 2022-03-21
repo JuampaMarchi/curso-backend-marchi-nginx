@@ -4,7 +4,6 @@ require('dotenv').config()
 
 const args = yargs(process.argv.slice(2)).argv
 
-console.log('Process Args', process.argv[2])
 console.log('Args', args)
 
 const serverData = {

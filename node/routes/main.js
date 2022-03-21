@@ -10,10 +10,21 @@ mainRouter.get('/', (req, res, next) => {
     res.send(`Hola, esta es la raiz en el puerto: <b>${serverData.port}</b> - PID <b>${process.pid}</b>`)
 })
 
-mainRouter.get('/data', (req, res, next) => {
-    console.log(`PID: ${process.pid}`)
-    console.log(`ENV: ${process.env.watch}`)
-    res.send(`Estas en DATA, usando el puerto: <b>${serverData.port}</b> - PID <b>${process.pid}</b>`)
+mainRouter.get('/server-info', (req, res, next) => {
+    pino.info('Acceso a la ruta exitoso')
+    pino.warn('Cuidado, algo no anda bien')
+    pino.error('Hubo un error')
+    res.send(`Estas en INFO, estos son los datos del servidor:
+        <ul>
+            <li>Argumentos del proceso: ${process.argv}</li>
+            <li>Carpeta actual: ${process.cwd()}</li>
+            <li>Ruta ejecutada: ${process.execPath}</li>
+            <li>Sistema operativo: ${process.platform}</li>
+            <li>Version de Node: ${process.version}</li>
+            <li>Memoria reservada: ${process.memoryUsage().rss}</li>
+            <li>PID del proceso:${process.pid}</li>
+        </ul>
+    `)
 })
 
 mainRouter.get('/random', (req, res, next) => {
