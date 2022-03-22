@@ -12,6 +12,7 @@ class Server {
         this.mode = serverData.mode
         this.middlewares()
         this.router()
+        this.initialize()
     }
     middlewares(){
         this.app.use(express.json())

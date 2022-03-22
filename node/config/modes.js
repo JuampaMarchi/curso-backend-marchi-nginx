@@ -3,15 +3,16 @@ const cluster = require('cluster')
 
 const fork_mode = (app) => {
     let child_process = fork(`./utils/fork_process.js`)
+    child_process.on('message', data => {
+        console.log(`Del hijo llego: '${data.res}'`)
+    })
     
-    app.all('*', (req, res, next) => {
-        let { url } = req
-        if(url == '/info'){
-            child_process.send('Del padre al hijo')
-            child_process.on('message', data => {
-                console.log(`Del hijo llego: '${data.res}'`)
-                res.send('a')
-            })
+    app.all('/info', (req, res, next) => {
+        try {
+                child_process.send('Del padre al hijo')
+                return res.send(`hola`)
+        } catch (error) {
+            console.log(error)   
         }
     })
 }
