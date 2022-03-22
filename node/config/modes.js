@@ -2,12 +2,17 @@ const { fork } = require('child_process')
 const cluster = require('cluster')
 
 const fork_mode = (app) => {
-    const child_process = fork(`./utils/fork_process.js`)
-    app.all('/inicio', (req, res, next) => {
-        child_process.send('Del padre al hijo')
-        child_process.on('message', data => {
-            res.send(`Este mensaje vino del hijo: ${data.res}`)
-        })
+    let child_process = fork(`./utils/fork_process.js`)
+    
+    app.all('*', (req, res, next) => {
+        let { url } = req
+        if(url == '/info'){
+            child_process.send('Del padre al hijo')
+            child_process.on('message', data => {
+                console.log(`Del hijo llego: '${data.res}'`)
+                res.send('a')
+            })
+        }
     })
 }
 

@@ -6,15 +6,15 @@ const pino = require('../utils/logger.js')
 const mainRouter = new Router()
 
 mainRouter.get('/', (req, res, next) => {
-    pino.info('Acceso a la ruta exitoso')
-    res.send(`Hola, esta es la raiz en el puerto: <b>${serverData.port}</b> - PID <b>${process.pid}</b>`)
+    pino.info('Acceso a la ruta principal exitoso')
+    return res.send(`Hola, esta es la raiz en el puerto: <b>${serverData.port}</b> - PID <b>${process.pid}</b>`)
 })
 
 mainRouter.get('/server-info', (req, res, next) => {
-    pino.info('Acceso a la ruta exitoso')
-    pino.warn('Cuidado, algo no anda bien')
-    pino.error('Hubo un error')
-    res.send(`Estas en INFO, estos son los datos del servidor:
+    // pino.info('Acceso a la ruta INFO exitoso')
+    // pino.warn('Cuidado, algo no anda bien en INFO')
+    // pino.error('Hubo un error en INFO')
+    return res.send(`Estas en INFO, estos son los datos del servidor:
         <ul>
             <li>Argumentos del proceso: ${process.argv}</li>
             <li>Carpeta actual: ${process.cwd()}</li>
